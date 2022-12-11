@@ -1,3 +1,7 @@
+// Global variables
+const inputEl = document.querySelector("#state-input");
+const buttonEl = document.querySelector("#search-button");
+
 const covidURL = "https://api.covidactnow.org/v2/state/NC.json?apiKey=d6243821fb274ebd829752059c7a410a";
 const covidApi = "d6243821fb274ebd829752059c7a410a";
 
@@ -12,12 +16,11 @@ function fetchCovidData(cityAC) {
     // Get response and conver to json.
         .then((res) => res.json())
         // Activate modal if an error occurs.
-        .catch(err => errorModal.classList.add("is-active"))
+        //.catch(err => errorModal.classList.add("is-active"))
         // Taking that json data and doing somethin with it
         .then((res) => {
             console.log(res)
             // Grab total cases of this state
-            const population = document.getElementById("");
             let totPopulation = res.population;
             console.log("Population: " + totPopulation);
             // Grab total vaccinations administered
@@ -48,6 +51,11 @@ function fetchCovidData(cityAC) {
             console.log("Negative Tests: " + negativeTests)
             testsData.push([cityAC, positiveTests, negativeTests])
 
-            drawChart();
+            //drawChart();
         })
 };
+
+buttonEl.addEventListener("click", function() { 
+    let searched =inputEl.value;
+    fetchCovidData(searched);
+});

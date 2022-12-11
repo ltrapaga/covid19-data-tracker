@@ -1,13 +1,29 @@
 .hero {
-  background: white;
+    background: white;
 }
 
 .navbar .navbar-item a {
-  margin-left: 2rem;
-  color: black;
+    margin-left: 2rem;
+    color: black;
 }
 
 .navbar-end a:hover {
     color: rgb(76, 200, 67);
-        transition: 1s;
+    transition: 1s;
+}
+
+main {
+    min-height: 100vh;
+    background: white;
+    padding-top: .5rem;
+    padding-bottom: 10rem;
+}
+  
+main article {
+    padding: 1.5rem;
+}
+
+.search-input {
+    display: flex;
+    align-items: center;
 }
