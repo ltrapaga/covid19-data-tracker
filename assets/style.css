@@ -1,0 +1,13 @@
+.hero {
+  background: white;
+}
+
+.navbar .navbar-item a {
+  margin-left: 2rem;
+  color: black;
+}
+
+.navbar-end a:hover {
+    color: rgb(76, 200, 67);
+        transition: 1s;
+}
