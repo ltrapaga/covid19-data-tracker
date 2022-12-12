@@ -1,4 +1,4 @@
-// Global variables
+// Global variables.
 const inputEl = document.querySelector('#state-input');
 const buttonEl = document.querySelector('#search-button');
 const casesChartEl = document.querySelector('#cases-chart-div');
@@ -11,7 +11,7 @@ errorModal.addEventListener('click', function() {
     errorModal.classList.remove('is-active');
 });
 
-// CovidActNow API
+// CovidActNow API.
 const covidURL = 'https://api.covidactnow.org/v2/state/NC.json?apiKey=d6243821fb274ebd829752059c7a410a';
 const covidApi = 'd6243821fb274ebd829752059c7a410a';
 
@@ -23,17 +23,13 @@ google.charts.load('current', {
 
 function fetchCovidData(cityAC) {
     fetch('https://api.covidactnow.org/v2/state/' + cityAC + '.json?apiKey=' + covidApi)
-    // Get response and conver to json.
+    // Get response and convert to json.
         .then((res) => res.json())
         // Activate modal if an error occurs.
-        .catch(error => errorModal.classList.add('is-active'))
-        // Taking that json data and doing somethin with it
+        .catch(err=> errorModal.classList.add('is-active'))
+        // Take json data and do something with it.
         .then((res) => {
-            console.log(res);
-            // Grab total cases of this state
-            let totPopulation = res.population;
-            console.log('Population: ' + totPopulation);
-            // Grab total vaccinations administered
+            // Grab total vaccinations administered. If null, grab total vaccinations completed.
             let totVaccinesAdministered = res.actuals.vaccinesAdministered;
             let totVaccinesCompleted = res.actuals.vaccinationsCompleted;
             let totVaccines;
@@ -46,17 +42,17 @@ function fetchCovidData(cityAC) {
                     totVaccines = totVaccinesAdministered
                 };
             vaccineData.push([cityAC, totVaccines]);
-            // Grab total cases of this state
+            // Grab total cases.
             let totCases = res.actuals.cases;
             console.log('Total Cases: ' + totCases);
-            // Grab total deaths of this state
+            // Grab total deaths.
             let totDeaths = res.actuals.deaths;
             console.log('Total Deaths: ' + totDeaths);
             casesData.push([cityAC, totCases, totDeaths]);
-            // Grab total positive tests of this state
+            // Grab total positive tests.
             let positiveTests = res.actuals.positiveTests;
             console.log('Positive Tests: ' + positiveTests);
-            // Grab total negative test of this state
+            // Grab total negative tests.
             let negativeTests = res.actuals.negativeTests;
             console.log('Negative Tests: ' + negativeTests);
             testsData.push([cityAC, positiveTests, negativeTests]);
@@ -66,7 +62,7 @@ function fetchCovidData(cityAC) {
 };
 
 buttonEl.addEventListener('click', function() { 
-    let searched =inputEl.value;
+    let searched = inputEl.value;
     fetchCovidData(searched);
 });
 
@@ -86,8 +82,8 @@ function drawChart() {
                       },
                       axes: {
                         x: {
-                          Cases: {label: 'Cases'}, // Bottom x-axis.
-                          Deaths: {side: 'top', label: 'Deaths'} // Top x-axis.
+                          Cases: {label: 'Deaths'}, // Bottom x-axis.
+                          Cases: {side: 'top', label: 'Cases'} // Top x-axis.
                         }
                       }};
  
