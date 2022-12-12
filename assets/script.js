@@ -17,8 +17,8 @@ const covidApi = 'd6243821fb274ebd829752059c7a410a';
 
 // Load the Google Charts Visualization API and the bar package.
 google.charts.load('current', {
-                    'packages':
-                    ['bar']
+                   'packages':
+                   ['bar']
                 });
 
 function fetchCovidData(cityAC) {
@@ -26,10 +26,10 @@ function fetchCovidData(cityAC) {
     // Get response and conver to json.
         .then((res) => res.json())
         // Activate modal if an error occurs.
-        //.catch(err => errorModal.classList.add("is-active"))
+        .catch(error => errorModal.classList.add('is-active'))
         // Taking that json data and doing somethin with it
         .then((res) => {
-            console.log(res)
+            console.log(res);
             // Grab total cases of this state
             let totPopulation = res.population;
             console.log('Population: ' + totPopulation);
@@ -44,22 +44,22 @@ function fetchCovidData(cityAC) {
                 else {
                     console.log('Total Vaccinations Administered: ' + totVaccinesAdministered);
                     totVaccines = totVaccinesAdministered
-                }
-            vaccineData.push([cityAC, totVaccines])
+                };
+            vaccineData.push([cityAC, totVaccines]);
             // Grab total cases of this state
             let totCases = res.actuals.cases;
             console.log('Total Cases: ' + totCases);
             // Grab total deaths of this state
             let totDeaths = res.actuals.deaths;
             console.log('Total Deaths: ' + totDeaths);
-            casesData.push([cityAC, totCases, totDeaths])
+            casesData.push([cityAC, totCases, totDeaths]);
             // Grab total positive tests of this state
             let positiveTests = res.actuals.positiveTests;
-            console.log('Positive Tests: ' + positiveTests)
+            console.log('Positive Tests: ' + positiveTests);
             // Grab total negative test of this state
             let negativeTests = res.actuals.negativeTests;
-            console.log('Negative Tests: ' + negativeTests)
-            testsData.push([cityAC, positiveTests, negativeTests])
+            console.log('Negative Tests: ' + negativeTests);
+            testsData.push([cityAC, positiveTests, negativeTests]);
 
             drawChart();
         })

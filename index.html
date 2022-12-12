@@ -47,7 +47,7 @@
             <div class="column is-10 is-offset-1">
               <div class="columns search-container is-multiline">
                 <div class="column is-12 search">
-                  <article class="columns featured">
+                  <article class="columns search-article">
                     <figure class="column is-7 search-img ">
                       <img src="https://media.istockphoto.com/id/1257379470/vector/usa-states-map-drawing.jpg?s=612x612&w=0&k=20&c=iJW5JxCJHXckpncRz5oxBJ71DBv_4XHgjS5OBT0Lajc=" alt="">
                     </figure>
@@ -66,11 +66,51 @@
           </div>
         </div>
       </section>
-      
+      <section>
+        <div id="data" class="columns is-v-centered">
+          <div id="cases-chart-div" class="column chart is-12 is-invisible">
+            <article class="columns is-multiline">
+              <div id="cases-chart" class="column is-12 box"></div>
+                <div class="column is-12 content ">
+                  <h1 class="title chart-title">Coronavirus Cases and Deaths</h1>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+      <section>
+        <div class="columns is-v-centered">
+          <div id="tests-chart-div" class="column chart is-12 is-invisible">
+            <article class="columns is-multiline">
+              <div id="tests-chart" class="column is-12 box"></div>
+                <div class="column is-12 content">
+                  <h1 class="title chart-title">Positive vesus Negative Coronavirus Tests </h1>
+                </div>
+              </div>            
+            </article>
+          </div>
+        </div>
+      </section>
+      <form>
+        <div id="error-modal" class="modal is-clipped">
+          <div class="modal-background"></div>
+            <div class="modal-content has-text-centered">
+              <div class="box">
+                <p>Not a valid entry!</p>
+                <p>Please input a valid US state acronym (Example: Georgia = "GA").</p>
+              </div>
+            </div>
+              <button class="modal-close is-large" aria-label="close"></button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </main>
 
     <script src="https://apis.google.com/js/api.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="./assets/script.js"></script>
-    </main>
+
 </body>
 </html>
