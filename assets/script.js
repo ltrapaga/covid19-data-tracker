@@ -85,6 +85,7 @@ formEl.addEventListener('submit', function (event) {
 window.onresize = function() {
     drawChart();
 }
+
 function drawChart() {
 
     // Create the Cases data table.
@@ -152,7 +153,7 @@ function drawChart() {
                     colors: ['#1E90FF', '#98FB98'],
                     series: {
                         0: { axis: 'Negative' }, // Bind series 0 to an axis named 'Negative'.
-                        1: { axis: 'Positive' } // Bind series 1 to an axis named 'Posititive'.
+                        1: { axis: 'Positive' } // Bind series 1 to an axis named 'Positive'.
                         },
                     axes: {
                         x: {
