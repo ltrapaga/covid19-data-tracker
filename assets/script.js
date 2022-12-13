@@ -1,6 +1,7 @@
 // Global variables.
 const inputEl = document.querySelector('#state-input');
 const buttonEl = document.querySelector('#search-button');
+const formEl = document.querySelector('#form');
 const casesChartEl = document.querySelector('#cases-chart-div');
 const deathsChartEl = document.querySelector('#deaths-chart-div');
 const vaccineChartEl = document.querySelector('#vacc-chart-div');
@@ -73,6 +74,10 @@ function fetchCovidData(cityAC) {
 buttonEl.addEventListener('click', function() { 
     let searched = inputEl.value;
     fetchCovidData(searched);
+});
+
+formEl.addEventListener('submit', function (event) {
+    event.preventDefault()
 });
 
 function drawChart() {
