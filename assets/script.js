@@ -1,7 +1,9 @@
 // Global variables.
 const inputEl = document.querySelector('#state-input');
+const historyEl = document.querySelector("#history");
 const buttonEl = document.querySelector('#search-button');
 const formEl = document.querySelector('#form');
+const clearEl= document.querySelector('#clear-history')
 const casesChartEl = document.querySelector('#cases-chart-div');
 const deathsChartEl = document.querySelector('#deaths-chart-div');
 const vaccineChartEl = document.querySelector('#vacc-chart-div');
@@ -11,6 +13,8 @@ const deathsData = [['State', 'Deaths', {role: 'style'}]];
 const vaccineData = [['State', 'Vaccinations', {role: 'style'}]];
 const testsData = [['State', 'Positive Tests', 'Negative Tests']];
 const errorModal = document.querySelector('#error-modal');
+// Empty array used for intial state search
+const searchHistory = new Set(JSON.parse(localStorage.getItem("state-search")||[]))
 errorModal.addEventListener('click', function() {
     errorModal.classList.remove('is-active');
 });
@@ -27,11 +31,15 @@ google.charts.load('current', {
                 });
 
 function fetchCovidData(cityAC) {
+    if (!cityAC) {
+        errorModal.classList.add('is-active');
+        return;
+    }
     fetch('https://api.covidactnow.org/v2/state/' + cityAC + '.json?apiKey=' + covidApi)
     // Get response and convert to json.
         .then((res) => res.json())
         // Activate modal if an error occurs.
-        .catch(err=> errorModal.classList.add('is-active'))
+        .catch(err => errorModal.classList.add('is-active'))
         // Take json data and do something with it.
         .then((res) => {
             // Grab total vaccinations administered. If null, grab total vaccinations completed.
@@ -71,19 +79,54 @@ function fetchCovidData(cityAC) {
         })
 };
 
-// Add click event to seach button that runs fetch for the city acronym input by the user.
-buttonEl.addEventListener('click', function() { 
-    let searched = inputEl.value;
-    fetchCovidData(searched);
-});
-
 formEl.addEventListener('submit', function (event) {
     event.preventDefault()
 });
 
+// Add click event to seach button that runs fetch for the city acronym input by the user.
+buttonEl.addEventListener('click', function() { 
+    let searched = inputEl.value;
+    fetchCovidData(searched);
+    searchHistory.add(searched);
+    // Saves searched city to local storage
+    localStorage.setItem('state-search', JSON.stringify([...searchHistory]));
+    renderSearchHistory();
+});
+
+
+function renderSearchHistory() {
+    //Creates list of previously searched cities
+    historyEl.innerHTML = "";
+    const searchArray = [...searchHistory];
+    for (var i = 0; i < searchArray.length; i++) {
+        let historyItem = document.createElement('button');
+        historyItem.setAttribute("class", "button is-info is-light");
+        historyItem.innerHTML= searchArray[i];
+
+        // Adds click event to each city in the search history list
+        historyItem.addEventListener("click", function() {
+            // Calls getWeather function when a city is clicked to obtain that city's current weather conditions and 5-day forecast
+            fetchCovidData(historyItem.innerHTML);
+        })
+        // Displays current weather conditions and 5-day forecast
+        historyEl.append(historyItem);
+    }
+};
+
+// Adds click event to clear history button
+clearEl.addEventListener("click", function() {
+    // Sets search history to empty array
+    searchHistory.clear();
+    localStorage.setItem("state-search", JSON.stringify([...searchHistory]));
+    renderSearchHistory();
+})
+
+renderSearchHistory();
+
 // Make google charts responsive.
 window.onresize = function() {
-    drawChart();
+    if(testsData.length > 1)
+        drawChart();
 }
 
 function drawChart() {
