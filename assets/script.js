@@ -4,6 +4,7 @@ const historyEl = document.querySelector("#history");
 const buttonEl = document.querySelector('#search-button');
 const formEl = document.querySelector('#form');
 const clearEl= document.querySelector('#clear-history')
+const searchedDataArr = [];
 const casesChartEl = document.querySelector('#cases-chart-div');
 const deathsChartEl = document.querySelector('#deaths-chart-div');
 const vaccineChartEl = document.querySelector('#vacc-chart-div');
@@ -35,6 +36,11 @@ function fetchCovidData(cityAC) {
         errorModal.classList.add('is-active');
         return;
     }
+    if (searchedDataArr.includes(cityAC)) {
+        console.log("City data already being displayed.")
+        return;
+    }
+
     fetch('https://api.covidactnow.org/v2/state/' + cityAC + '.json?apiKey=' + covidApi)
     // Get response and convert to json.
         .then((res) => res.json())
@@ -42,6 +48,9 @@ function fetchCovidData(cityAC) {
         .catch(err => errorModal.classList.add('is-active'))
         // Take json data and do something with it.
         .then((res) => {
+            // Push the succesfully searched city to searchedDataArr to prevent duplicate data from displaying in google charts
+            searchedDataArr.push(cityAC);
+            console.log(searchedDataArr);
             // Grab total vaccinations administered. If null, grab total vaccinations completed.
             let color = Math.floor(Math.random()*16777215).toString(16);
             let totVaccinesAdministered = res.actuals.vaccinesAdministered;
