@@ -1,17 +1,34 @@
-What was your motivation?
-Why did you build this project? (Note: the answer is not "Because it was a homework assignment.")
-What problem does it solve?
-What did you learn?
-What makes your project stand out?
-
-# Project 1: COVID-19 Data Tracker
+# COVID-19 Data Tracker
 
 ## Description
 
-- My motivation when completing this project was to practice and become more proficient in the concepts I have learned in Module 5: Third Party APIs of Bootcamp.
-- I built this project to apply what I have learned in class about JavaScript, jQuery, Day.js, Google Fonts API, etc., to a real web application. Creating my own Work Day Scheduler from the starter-code allowed me to advance my skills and enlightened me to the areas that I need to improve upon.
-- During the completion of this project, I learned how to properly use Day.js to retrieve the current date and time, use jQuery to decrease the length and increase the efficiency of my JS code, and more. These capabilities helped me to dynamically increase the functionality of my web application through JavaScript.
+Covid-19 Data Tracker is a web application that helps the public stay up-to-date on pertinent COVID-19 information in the United States. Search for any U.S. state via its acronym, and current data on cases, deaths, vaccinations, and positive versus negative tests will be displayed for that U.S. state. Want to compare the COVID-19 stats for multiple states? No problem! Simply search for any additional states and the info for each one will be added to the data tables alongside any previosuly searched states' data.
 
-## Installation
+## Table of Contents
 
-To access my Web APIs Challenge: Code Quiz, please visit the live site at https://ltrapaga.github.io/covid19-data-tracker/.
+* [Usage](#usage)
+* [License](#license)
+* [Contributing](#contributions)
+* [Tests](#tests)
+* [Questions](#questions)
+
+## Usage
+
+  To use this application, please visit <https://ltrapaga.github.io/covid19-data-tracker/> to access the deployed web application.
+
+## License
+
+ [![License](<https://img.shields.io/badge/License-MIT-yellow.svg>)](<https://opensource.org/licenses/MIT>)
+  
+## Contributions
+
+  Contributors: Laura Trapaga
+
+## Tests
+
+  The following is needed to run tests: N/A
+
+## Questions
+
+  If you have any questions about the repository, please contact me directly at:
+  [Email](mailto:trapaga9@gmail.com) | [Github](<https://github.com/ltrapaga>)
