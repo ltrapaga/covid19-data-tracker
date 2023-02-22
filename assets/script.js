@@ -16,7 +16,7 @@ const testsData = [["State", "Positive Tests", "Negative Tests"]];
 const errorModal = document.querySelector("#error-modal");
 // Empty array used for intial state search
 const searchHistory = new Set(
-  JSON.parse(localStorage.getItem("state-search") || [])
+  JSON.parse(localStorage.getItem("state-search") || "[]")
 );
 errorModal.addEventListener("click", function () {
   errorModal.classList.remove("is-active");
